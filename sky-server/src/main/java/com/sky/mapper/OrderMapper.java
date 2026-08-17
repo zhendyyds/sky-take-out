@@ -85,8 +85,4 @@ public interface OrderMapper {
 //     * @return
 //     */
 //    List<GoodsSalesDTO> getSalesTop10(LocalDateTime begin,LocalDateTime end);
-
-    //跳过微信支付
-    @Update("update orders set status = #{orderStatus},pay_status = #{orderPaidStatus} ,checkout_time = #{check_out_time} where id = #{id}")
-    void updateStatus(Integer orderStatus, Integer orderPaidStatus, LocalDateTime check_out_time, Long id);
 }

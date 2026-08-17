@@ -55,20 +55,20 @@ sky:
     appid: ${sky.wechat.appid}
     #小程序 AppSecret
     secret: ${sky.wechat.secret}
-#    #微信支付商户号
-#    mchid: ${sky.wechat.mchid}
-#    #商户 API 证书序列号
-#    mchSerialNo: ${sky.wechat.mchSerialNo}
-#    #商户私钥文件路径
+    #微信支付商户号
+    mchid: ${sky.wechat.mchid}
+    #商户 API 证书序列号
+    mchSerialNo: ${sky.wechat.mchSerialNo}
+    #商户私钥文件路径
 #    privateKeyFilePath: ${sky.wechat.privateKeyFilePath}
-#    #微信支付 APIv3 密钥
-#    apiV3Key: ${sky.wechat.apiV3Key}
-#    #微信支付平台证书路径
+    #微信支付 APIv3 密钥
+    apiV3Key: ${sky.wechat.apiV3Key}
+    #微信支付平台证书路径
 #    weChatPayCertFilePath: ${sky.wechat.weChatPayCertFilePath}
-#    #支付成功回调地址
-#    notifyUrl: ${sky.wechat.notifyUrl}
-#    #退款回调地址
-#    refundNotifyUrl: ${sky.wechat.refundNotifyUrl}
+    #支付成功回调地址
+    notifyUrl: ${sky.wechat.notifyUrl}
+    #退款回调地址
+    refundNotifyUrl: ${sky.wechat.refundNotifyUrl}
 #  shop:
 #    address: ${sky.shop.address}
 #  baidu:

@@ -57,9 +57,6 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private WebSocketServer webSocketServer;
 
-    //跳过微信支付
-    private Orders orders;
-
     /**
      * 用户下单
      * @param ordersSubmitDTO
@@ -102,9 +99,6 @@ public class OrderServiceImpl implements OrderService {
         orders.setConsignee(addressBook.getConsignee());
         orders.setUserId(userId);
 
-        //跳过微信支付
-        this.orders = orders;
-
         orderMapper.insert(orders);
 
         //3. 向订单明细表插入n条数据
@@ -145,7 +139,6 @@ public class OrderServiceImpl implements OrderService {
         Long userId = BaseContext.getCurrentId();
         User user = userMapper.getById(userId);
 
-//        跳过微信支付
 //        //调用微信支付接口，生成预支付交易单
 //        JSONObject jsonObject = weChatPayUtil.pay(
 //                ordersPaymentDTO.getOrderNumber(), //商户订单号
@@ -153,22 +146,17 @@ public class OrderServiceImpl implements OrderService {
 //                "苍穹外卖订单", //商品描述
 //                user.getOpenid() //微信用户的openid
 //        );
-//
-//        if (jsonObject.getString("code") != null && jsonObject.getString("code").equals("ORDERPAID")) {
-//            throw new OrderBusinessException("该订单已支付");
-//        }
 
+        //跳过微信支付
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("code", "ORDERPAID");
 
-        //上面注释的代码和下面的代码是为了模拟微信支付接口返回的结果，实际使用时请使用上面的代码调用微信支付接口
+        if (jsonObject.getString("code") != null && jsonObject.getString("code").equals("ORDERPAID")) {
+            throw new OrderBusinessException("该订单已支付");
+        }
+
         OrderPaymentVO vo = jsonObject.toJavaObject(OrderPaymentVO.class);
         vo.setPackageStr(jsonObject.getString("package"));
 
-        Integer OrderStatus = Orders.TO_BE_CONFIRMED;  //订单状态，待接单
-        Integer OrderPaidStatus = Orders.PAID;//支付状态，已支付
-        LocalDateTime check_out_time = LocalDateTime.now();//更新支付时间
-        orderMapper.updateStatus(OrderStatus, OrderPaidStatus, check_out_time, this.orders.getId());
         return vo;
     }
 
